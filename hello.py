@@ -1,27 +1,9 @@
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from random import choice
 
-rawData = {
-         "Jürgen Tamm": [143, '../static/friendata/img/1.jpg'],
-         "Grethe Märts": [167, '../static/friendata/img/2.jpg'],
-         "Hugo Vaher": [10, '../static/friendata/img/3.jpg'],
-         "Päris Inimene": [486, '../static/friendata/img/4.jpg']}
-""" 
-rawData = {
-         "1": [1, '../static/friendata/img/1.jpg'],
-         "2": [2, '../static/friendata/img/2.jpg'],
-         "3": [3, '../static/friendata/img/3.jpg'],
-         "4": [4, '../static/friendata/img/4.jpg'],
-         "5": [5, '../static/friendata/img/1.jpg'],
-         "6": [6, '../static/friendata/img/2.jpg'],
-         "7": [7, '../static/friendata/img/3.jpg'],
-         "8": [8, '../static/friendata/img/4.jpg'],
-         "9": [9, '../static/friendata/img/1.jpg'],
-         "10": [10, '../static/friendata/img/2.jpg'],
-         "11": [11, '../static/friendata/img/3.jpg'],
-         "12": [12, '../static/friendata/img/4.jpg']} """
+from csv_to_list import csvToDict
 
-kasutajaNimi = 'Jürgen Tamm'
+rawData = csvToDict("hedy.csv")
 maxScore = len(rawData.keys())-1
 
 app = Flask(__name__)
@@ -29,10 +11,20 @@ app.secret_key = b'41a2fc1a57d9edde2e44a19616490a330726f984ed7470953da97845c3622
 app.config['SESSION_COOKIE_SAMESITE'] = "Strict"
 
 def randomSelect(viimaneNimi):
-   while True:
-      nimi = choice(list(session['people'].keys()))
-      if nimi != kasutajaNimi and nimi != viimaneNimi:
-         return nimi
+   if viimaneNimi == "start":
+      esimene = choice(list(session['people'].keys()))
+
+      while True:
+         nimi = choice(list(session['people'].keys()))
+         if nimi != esimene:
+            return esimene, nimi
+
+   else:
+      while True:
+         nimi = choice(list(session['people'].keys()))
+         if nimi != viimaneNimi:
+            return nimi
+
 
 @app.route("/", methods=["GET"])
 def index():
@@ -56,9 +48,9 @@ def lose():
 def endpoint():
    nimi = str(request.get_json('nimi')['nimi'])
 
-   if nimi == 'kasutaja':
-      randomFriend = randomSelect(nimi)
-      return jsonify({'given': [kasutajaNimi, session['people'].pop(kasutajaNimi)], 'guess': [randomFriend, session['people'][randomFriend]], 'score': session['score']})
+   if nimi == 'start':
+      randomFriendStarter, randomFriend = randomSelect(nimi)
+      return jsonify({'given': [randomFriendStarter, session['people'].pop(randomFriendStarter)], 'guess': [randomFriend, session['people'][randomFriend]], 'score': session['score']})
    else:
       session['score'] += 1
       if session['score'] == maxScore:
