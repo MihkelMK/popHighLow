@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lähedaseim sõber</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="container game">
+        <div class="vsCircle">
+            <h1 class="vsText">VS</h1>
+        </div>
+        <div class="person given background" style="background-color: #636260;"></div>
+        <div class="person given"">
+            <div class="tekst">
+                <h2 id="givenName">Person Personsonn</h2>
+                <h1 class="sõbranr" id="givenNr">--</h1>
+                <p>ühist sõpra facebookis</p>
+            </div>
+        </div>
+        <div class="person guess background" style="background-color: #636260;"></div>
+        <div class="person guess"">
+            <div class="tekst">
+                <h2 id="guessName">Person Personsonn</h2>
+                <h1 class="sõbranr" id="guessNr">--</h1>
+                <button onclick="checkGuess('rohkem')" class="sõbranr">Rohkem</button>
+                <button onclick="checkGuess('vähem')" class="sõbranr">Vähem</button>
+                <p>ühist sõpru facebookis</p>
+            </div>
+        </div>
+        <h3 class="skoor">Skoor: 0</h3>
+        <h3 class="topSkoor">Top Skoor: 0</h3>
+    </div>
+    <script src="./static/middleman.js" defer></script>
+</body>
+</html>

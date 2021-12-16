@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proovi uuesti</title>
+    <link rel="stylesheet" href="./static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="landing">
+        {% if score < topScore %}
+        <h1>Oi ei</h1>
+        <p>
+          See ei läinud üldse hästi.<br />Enne suutsid {{topScore}} sõpra
+          pakkuda, nüüd ainult {{score}}.<br />
+          Mis toimub?
+        </p>
+        {% else %}
+        <h1>Soliidne üritus</h1>
+        <p>
+          Sa hindasid {{score}} sõbra läheust adekvaatselt. Parem kui varem.
+          <br />
+          Siiski, {{maxScore-score}} ootavad veel su hinnangut. <br />
+        </p>
+        {% endif %}
+        <form>
+          <button formaction="/game" class="alusta">Proovi uuesti?</button>
+        </form>
+      </div>
+      <img src="./static/logo.png" />
+    </div>
+  </body>
+</html>
