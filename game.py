@@ -3,7 +3,7 @@ from flask_session import Session
 from random import choice
 import redis
 
-from csv_to_list import csvToDict
+from CSVParser import csvToDict
 
 rawData = csvToDict("mihkel.csv")
 maxScore = len(rawData.keys())-1
