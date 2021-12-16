@@ -12,6 +12,8 @@ const updatePeople = (nimi) => {
   request(nimi).then((a) => {
     document.getElementsByClassName('skoor')[0].textContent =
       'Skoor: ' + a['score'];
+    document.getElementsByClassName('topSkoor')[0].textContent =
+      'Top Skoor: ' + a['topScore'];
     if ('võit' in a) {
       document.location.href = '/win';
     }

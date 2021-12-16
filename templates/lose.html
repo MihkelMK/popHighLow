@@ -14,9 +14,21 @@
   <body>
     <div class="container">
       <div class="landing">
-        <h1 class>Oi ei</h1>
-        <p>See ei läinud üldse hästi</p>
-        <p>Sa said ainult {{score}} punkti, maksimum oli {{maxScore}}.</p>
+        {% if score < topScore %}
+        <h1>Oi ei</h1>
+        <p>
+          See ei läinud üldse hästi.<br />Enne suutsid {{topScore}} sõpra
+          pakkuda, nüüd ainult {{score}}.<br />
+          Mis toimub?
+        </p>
+        {% else %}
+        <h1>Soliidne üritus</h1>
+        <p>
+          Sa hindasid {{score}} sõbra läheust adekvaatselt. Parem kui varem.
+          <br />
+          Siiski, {{maxScore-score}} ootavad veel su hinnangut. <br />
+        </p>
+        {% endif %}
         <form>
           <button formaction="/game" class="alusta">Proovi uuesti?</button>
         </form>
