@@ -18,3 +18,7 @@ Kasutame formaati profiiliURL | pildiThumbnailURL | nimi | ühisteSõpradeArv
 
 Hetkel kasutasime chromei laiendid "Instant Data Scraper" lehel "facebook.com/user/friends", aga tulevikus tahaks teha seda kuidagi automaatsemaks.
 Kui kasutad sama asja, siis rohkemate inimeste info saamikseks peab enne scrapeimist alla kerima.
+
+### Firefoxiga ei tööta pildid
+
+Oleme probleemis teadlikud, aga ei tea miks või kuidas parandada. Millegipärast ei saa firefox hakkama facebookist saadud urlide fetchimisega. Hetkel peab lihtsalt chromei kasutama.
