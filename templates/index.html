@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./static/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="./static/middleman.js" defer></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700&display=swap"
       rel="stylesheet"
@@ -14,13 +15,24 @@
   <body>
     <div class="container">
       <div class="landing">
-        <h1 class>Kes on su kõige lähedasem sõber?</h1>
+        <h1>Kes on su kõige lähedasem sõber?</h1>
         <p>
           Arva, kellel su facebooki sõpradest on sinuga rohkem ühiseid sõpru.
+          <br />
+          Selleks on meil vaja su sõbralisti infot csv failina. README.md failis
+          on kirjas kuidas ja mis kujul seda soovime.
         </p>
-        <form>
-          <button formaction="/game" class="alusta">Alusta mänguga</button>
+        <form onsubmit="checkCSV(getElementById('csv'));return false">
+          <label for="csv">CSV faili nimi projekti kaustas (nimi.csv):</label
+          ><br />
+          <input type="text" id="csv" name="csv" /><br />
         </form>
+        <p class="filePole" style="opacity: 0">
+          Selle nimega faili pole projekti kaustas. Proovi uuesti!
+        </p>
+        <button onclick="checkCSV(getElementById('csv'))" class="alusta">
+          Alusta mänguga
+        </button>
       </div>
       <img src="./static/logo.png" />
     </div>

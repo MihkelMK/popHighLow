@@ -1,12 +1,11 @@
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from flask_session import Session
 from random import choice
+from pathlib import Path
+from copy import deepcopy
 import redis
 
 from CSVParser import csvToDict
-
-rawData = csvToDict("mihkel.csv")
-maxScore = len(rawData.keys())-1
 
 def randomSelect(viimaneNimi):
    if viimaneNimi == "start":
@@ -37,9 +36,18 @@ Session(app)
 def index():
    return render_template("index.html")
 
+@app.route("/", methods=["POST"])
+def csvFind():
+   path = Path(request.get_json('file')['file'])
+   if path.is_file():
+      session['data'] = csvToDict(path)
+      return jsonify({'file': 'olemas'})
+   return jsonify({'file': 'pole'})
+
 @app.route("/game", methods=["GET"])
 def game():
-   session['people'] = rawData
+   session['people'] = deepcopy(session['data'])
+   session['maxScore'] = len(session['people'].keys())-1
    session['score'] = 0
    try:
       a = session['topScore']
@@ -53,7 +61,7 @@ def win():
 
 @app.route("/lose", methods=["GET"])
 def lose():
-   return render_template("lose.html", score=session.get('score', None), maxScore=maxScore, topScore=session.get('topScore', None))
+   return render_template("lose.html", score=session.get('score', None), maxScore=session['maxScore'], topScore=session.get('topScore', None))
 
 @app.route("/game", methods=["POST"])
 def endpoint():
@@ -67,7 +75,7 @@ def endpoint():
       if session['score'] > session['topScore']:
          session['topScore'] = session['score']
 
-      if session['score'] == maxScore:
+      if session['score'] == session['maxScore']:
          return jsonify({'võit': 'jah', 'score': session['score'], 'topScore': session['topScore']})
 
       randomFriend = randomSelect(nimi)

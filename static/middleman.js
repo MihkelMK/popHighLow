@@ -8,6 +8,16 @@ function request(name) {
   }).then((response) => response.json());
 }
 
+function requestIndex(name) {
+  let data = { file: name };
+
+  return fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  }).then((response) => response.json());
+}
+
 const updatePeople = (nimi) => {
   request(nimi).then((a) => {
     document.getElementsByClassName('skoor')[0].textContent =
@@ -48,6 +58,16 @@ const checkGuess = (guess) => {
   } else {
     document.location.href = '/lose';
   }
+};
+
+const checkCSV = (fileName) => {
+  requestIndex(fileName.value).then((a) => {
+    if (a['file'] == 'olemas') {
+      document.location.href = '/game';
+    } else {
+      document.getElementsByClassName('filePole')[0].style.opacity = 1;
+    }
+  });
 };
 
 updatePeople('start');

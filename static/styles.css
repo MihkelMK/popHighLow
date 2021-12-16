@@ -3,6 +3,7 @@ body {
     --dark_color: #000000;
     --accent_color: #1778f2;
 
+    overflow: hidden;
     margin: 0;
     padding: 0;
     font-family: "Lato", sans-serif;
@@ -23,8 +24,21 @@ p {
     font-weight: 300;
 }
 
+label {
+    font-size: 1em;
+    font-weight: 600;
+}
+
 #guessNr {
     display: none;
+}
+
+.filePole {
+    color: red;
+    transition: opacity 0.3s ease-out 0s;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 10vh;
 }
 
 .container {
@@ -56,10 +70,10 @@ p {
     color: var(--accent_color);
 }
 
-.landing button {
+.landing button,
+.landing input {
     color: var(--accent_color);
     border: 0;
-    margin-top: 10vh;
 }
 
 .game {
@@ -121,14 +135,10 @@ p {
     font-weight: 700;
 }
 
-button {
-    font-size: 1.5em;
-    padding-right: 3.125rem;
-    margin: 0 auto 15px;
+button,
+input {
     display: block;
 
-    width: 12.5rem;
-    padding: 0.825rem;
     border-radius: 8rem;
     position: relative;
     border: 0.125rem solid var(--light_color);
@@ -141,7 +151,22 @@ button {
     transition: all 0.1s;
 }
 
-button:hover {
+button {
+    font-size: 1.5em;
+    padding-right: 3.125rem;
+    margin: 0 auto 15px;
+    width: 12.5rem;
+    padding: 0.825rem;
+}
+
+input {
+    margin: 15px auto 15px;
+    width: 30rem;
+    padding: 0.825rem;
+}
+
+button:hover,
+input:hover {
     color: var(--light_color);
     background: var(--accent_color);
 }
